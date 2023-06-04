@@ -94,13 +94,15 @@
 .ScreenshotTitle {
   margin: 0px;
   align-self: center;
+  font-weight: 400;
+  font-size: 55px;
   margin-left: 20px;
 }
 
 .Sreenshots {
   width: 96%;
   justify-self: center;
-  height: 52vh;
+  height: 51vh;
   overflow-y: scroll;
   overflow-x: hidden;
   display: grid;

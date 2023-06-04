@@ -1,0 +1,48 @@
+.StoreComponent {
+  display: flex;
+  align-items: center;
+  width: 95%;
+  justify-self: center;
+  background-color: #2f332e;
+  border-radius: 6px;
+  color: aliceblue;
+  height: 90px;
+}
+
+.StoreGamePrice{
+    margin-left: auto;
+    margin-bottom: 0%;
+    margin-top: 0%;
+}
+
+.StoreIcon{
+    margin-left: 20px;
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+
+.TitleofStore{
+    font-size: 30px;
+    margin-left: 50px;
+    margin-bottom: 0%;
+    margin-top: 0%;
+}
+
+.VisitStoreBtn {
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 80%;
+    font-size: 20px;
+    font-weight: 800;
+    width: 15%;
+    filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.81));
+    transition: 0.4s;
+    justify-content: center;
+    align-items: center;
+}
+
+.VisitStoreBtn:hover {
+    transform: translateY(-8px);
+    font-size: 22px;
+    font-weight: 800;
+}

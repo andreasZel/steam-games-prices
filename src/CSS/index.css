@@ -7,8 +7,6 @@
   background-color: #242424;
   margin: 0;
 
- 
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -19,7 +17,12 @@
 #root,
 html,
 body {
+  caret-color: transparent;
   height: 100%;
+}
+
+input {
+  caret-color: aliceblue;
 }
 
 a {
