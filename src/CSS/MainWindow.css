@@ -1,0 +1,14 @@
+.MainWindow {
+  background-color: #424741;
+  width: 80%;
+  height: 100%;
+
+  display: grid;
+  grid-template-rows: 0.1fr 1fr;
+  align-items: center;
+
+  margin: auto;
+  row-gap: 20px;
+  min-width: 100px;
+  box-shadow: 0px 4px 58px 41px rgba(5, 3, 14, 0.25);
+}

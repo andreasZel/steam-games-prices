@@ -1,0 +1,38 @@
+.SearchedGames {
+  display: grid;
+  grid-template-rows: 0.07fr 1fr;
+  width: 97%;
+  margin: auto;
+  height: 100%;
+  background-color: #2f332e;
+  border-radius: 9px 9px 0px 0px;
+}
+
+.search_Title {
+  color: aliceblue;
+  padding-left: 20px;
+}
+
+.Searched_Games_Area {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: grid;
+  width: 95%;
+  margin: auto;
+  height: 1029px; /* Might need tweaking*/
+  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #9a9a9a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+}

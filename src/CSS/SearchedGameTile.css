@@ -1,0 +1,29 @@
+.SearchedGameTile {
+  margin-left: auto;
+  margin-right: auto;
+  width: 232px;
+  height: 350px;
+  display: grid;
+  align-items: center;
+  grid-template-rows: 0.1fr 0.4fr 0.3fr 0.3fr;
+  background-color: #465357;
+  color: aliceblue;
+  transition: 0.3s;
+}
+
+.SearchedGameTile:hover {
+  filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.95));
+}
+
+.Game_Title {
+  margin-left: 20px;
+}
+
+.Game_Price {
+  margin: auto;
+}
+
+.Searched_Games_Img,
+.Store_Img {
+  text-align: center;
+}
