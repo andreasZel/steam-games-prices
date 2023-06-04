@@ -6,6 +6,7 @@
   height: 100%;
   background-color: #2f332e;
   border-radius: 9px 9px 0px 0px;
+  
 }
 
 .search_Title {
@@ -15,14 +16,17 @@
 
 .Searched_Games_Area {
   overflow-y: scroll;
+  padding: 4px;
   overflow-x: hidden;
   display: grid;
   width: 95%;
   margin: auto;
-  height: 1029px; /* Might need tweaking*/
+  justify-content: center;
+  height: 900px; 
   grid-auto-rows: 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-template-columns: 14vw 14vw 14vw 14vw ;
+  grid-gap: 10px;
+  grid-row-gap: 20px;
 }
 
 ::-webkit-scrollbar {

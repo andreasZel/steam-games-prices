@@ -1,0 +1,10 @@
+.GameInfoArea {
+  display: grid;
+  grid-template-columns: 0.7fr 1fr;
+  grid-template-rows: 0.5fr 0.9fr;
+  width: 97%;
+  margin: auto;
+  height: 100%;
+  background-color: #2f332e;
+  border-radius: 9px 9px 0px 0px;
+}

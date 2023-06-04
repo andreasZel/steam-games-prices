@@ -1,0 +1,10 @@
+.StorePricesInfo {
+  filter: drop-shadow(0px 4px 73px rgba(0, 0, 0, 0.25));
+  width: 96%;
+  height: 97%;
+  justify-self: center;
+  margin-top: 20px;
+  background-color: #424741;
+  grid-column: 2;
+  grid-row: 1 / 3;
+}

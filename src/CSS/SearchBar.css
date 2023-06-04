@@ -8,6 +8,7 @@
   margin-right: auto;
   margin-top: 20px;
   border-radius: 9px;
+  transition: 0.4s;
 }
 
 .SearchBar:focus {

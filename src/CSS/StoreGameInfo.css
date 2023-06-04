@@ -1,0 +1,115 @@
+.StoreGameInfo {
+  width: 100%;
+  height: 100%;
+  justify-self: center;
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  row-gap: 15px;
+  grid-template-rows: 0.3fr 1fr;
+}
+
+.GameTitleArea {
+  color: aliceblue;
+  display: flex;
+  align-items: flex-end;
+  justify-self: end;
+  width: 98%;
+  grid-row: 1;
+  border-bottom: 5px solid aliceblue;
+}
+
+.SteamGameTitle,
+.DeveloperPublisher {
+  margin: 0px;
+}
+
+.GameImageArea {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-row: 2;
+}
+
+.Header_img {
+  grid-row: 1;
+  grid-column: 1;
+  background-color: #465357;
+  width: 80%;
+  height: 80%;
+  color: aliceblue;
+  justify-self: center;
+  background-size: cover;
+}
+
+.Metacritic_img {
+  grid-row: 1;
+  grid-column: 1;
+  position: relative;
+  align-self: flex-end;
+  justify-self: end;
+  z-index: 2;
+  width: 100%;
+  height: 55%;
+}
+
+.GenreScoreArea {
+  grid-row: 1;
+  display: flex;
+  grid-column: 1;
+  position: relative;
+  align-self: flex-end;
+  justify-content: center;
+  align-content: flex-end;
+  z-index: 2;
+  color: aliceblue;
+  width: 100%;
+  height: 120px;
+  justify-self: end;
+}
+
+.Genre,
+.MetacriticScore {
+  align-self: flex-end;
+  margin: 0%;
+  margin-bottom: 3.5vh;
+}
+
+.Genre {
+  margin-bottom: 4vh;
+}
+
+.GameImagesArea {
+  grid-row: 2;
+  width: 93%;
+  height: 57vh;
+  justify-self: center;
+  background-color: #424741;
+  filter: drop-shadow(0px 4px 73px rgba(0, 0, 0, 0.25));
+  color: aliceblue;
+  display: grid;
+  grid-template-rows: 0.2fr 0.9fr;
+}
+
+.ScreenshotTitle {
+  margin: 0px;
+  align-self: center;
+  margin-left: 20px;
+}
+
+.Sreenshots {
+  width: 96%;
+  justify-self: center;
+  height: 52vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-row-gap: 15px;
+}
+
+.screenshot_imge {
+  width: 100%;
+  background-color: #213547;
+  height: 200px;
+}
