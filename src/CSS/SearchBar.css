@@ -9,6 +9,8 @@
   margin-top: 20px;
   border-radius: 9px;
   transition: 0.4s;
+  z-index: 1;
+  grid-row: 1;
 }
 
 .SearchBar:focus {
@@ -28,8 +30,14 @@
   text-align: left;
   font-size: 25px;
   color: aliceblue;
+  z-index: 1;
 }
 
 input:focus {
   outline: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

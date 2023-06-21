@@ -1,21 +1,21 @@
 import "../CSS/SearchedGames.css";
-import SearchedGameTile from "./SearchedGameTile.jsx";
+import GetDbGames from '../Functions/MainWindowFunctions.jsx'
+
+import { useEffect, useState } from "react";
 
 export default function SearchedGames() {
+
+  const [SteamSavedGames, addremoveGames] = useState([]);
+
+  useEffect(() => {
+    GetDbGames({addremoveGames})
+  }, []);
+
   return (
     <div className="SearchedGames">
       <h2 className="search_Title">Games Searched:</h2>
       <div className="Searched_Games_Area">
-        <SearchedGameTile />
-        <SearchedGameTile />
-        <SearchedGameTile />
-        <SearchedGameTile />
-        <SearchedGameTile />
-        <SearchedGameTile />
-        <SearchedGameTile />
-        <SearchedGameTile />
-        <SearchedGameTile />
-        <SearchedGameTile />
+      {SteamSavedGames}
       </div>
     </div>
   );

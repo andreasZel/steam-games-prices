@@ -5,7 +5,7 @@
   height: 350px;
   display: grid;
   align-items: center;
-  grid-template-rows: 0.1fr 0.4fr 0.3fr 0.3fr;
+  grid-template-rows: 0.1fr 0.4fr 0.2fr 0.5fr;
   background-color: #465357;
   color: aliceblue;
   transition: 0.3s;
@@ -17,14 +17,17 @@
 }
 
 .Game_Title {
-  margin-left: 20px;
+  text-align: center;
 }
 
 .Game_Price {
-  margin: auto;
+  margin: 0px;
+  text-align: center;
 }
 
 .Searched_Games_Img,
 .Store_Img {
   text-align: center;
+  justify-self: center;
 }
+

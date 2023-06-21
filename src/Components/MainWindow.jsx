@@ -4,11 +4,12 @@ import GameInfoArea from "./GameInfoArea";
 import SearchedGames from "./SearchedGames.jsx";
 
 export default function MainWindow() {
+  
   return (
     <div className="MainWindow">
       <SearchBar />
-      {/* <SearchedGames /> */}
-      <GameInfoArea />
+      <SearchedGames /> 
+      {/*<GameInfoArea />*/}
     </div>
   );
 }
