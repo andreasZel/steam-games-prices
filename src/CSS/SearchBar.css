@@ -37,7 +37,22 @@ input:focus {
   outline: none;
 }
 
+.SuggestionUl {
+  padding:0%;
+  list-style-type: none;
+  width: 100%;
+  transition: 0.4s;
+}
+
+.SuggestionUl li:hover {
+  background-color: #d8d4cf;
+}
+
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

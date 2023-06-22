@@ -1,5 +1,7 @@
 import "../CSS/SearchBar.css";
 import SearchIcon from "../assets/search-icon.svg";
+
+import GameNameSuggestions from "../Functions/GameNameSuggestions.jsx";
 import { useState } from "react";
 
 let style = {
@@ -9,7 +11,9 @@ let style = {
 let Suggestionsstyle = {
   position: "absolute",
   top: "80px",
+  paddingLeft: "4px",
   width: "75%",
+  fontSize: "25px",
   justifySelf: "center",
   height: "300px",
   backgroundColor: "#747e72",
@@ -21,8 +25,11 @@ let Suggestionsstyle = {
 };
 
 export default function SearchBar() {
+  
   const [isHoverd, FocusGain] = useState(style);
   const [Suggestions, SuggestiOn] = useState(Suggestionsstyle);
+  const [TypedText, updateText] = useState("");
+  const [SuggestionList, updateSuggestionList] = useState(<li></li>);
 
   function changeStyle() {
     FocusGain((previousStyle) => {
@@ -40,25 +47,37 @@ export default function SearchBar() {
         animation: "fadeIn 1s",
         animationDelay: "0s",
         animationFillMode: "forwards",
-        display: previousStyle.display === "none" 
-        ? "" 
-        : "none",
+        display: previousStyle.display === "none" ? "" : "none",
       };
     });
   }
+
+  const handleChange = (event) => {
+    updateText(event.target.value);
+  };
 
   return (
     <>
       <div className="SearchBar" style={isHoverd}>
         <img className="Search_image" src={SearchIcon} />
         <input
+          value={TypedText}
           className="Search_input"
           onFocus={changeStyle}
           onBlur={changeStyle}
+          onKeyUp={() => {
+            GameNameSuggestions({
+              TypedText,
+              updateSuggestionList,
+            });
+          }}
+          onChange={handleChange}
           type="text"
         ></input>
       </div>
-      <div className="Search_suggestions" style={Suggestions}></div>
+      <div className="Search_suggestions" style={Suggestions}>
+        <ul className="SuggestionUl">{SuggestionList}</ul>
+      </div>
     </>
   );
 }
