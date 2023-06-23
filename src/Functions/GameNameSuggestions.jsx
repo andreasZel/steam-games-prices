@@ -1,6 +1,6 @@
 import GameNameAndIdS from "../assets/GameNameAndIdS.js";
 
-export default function GameNameSuggestions({TypedText, updateSuggestionList}) {
+export default function GameNameSuggestions({TypedText, updateSuggestionList, SuggestiOn}) {
         
     var suggestions = [];
 
@@ -10,9 +10,10 @@ export default function GameNameSuggestions({TypedText, updateSuggestionList}) {
     var reg = new RegExp(`^`+TypedText.toLowerCase())
     var filteredArray = GameNameAndIdS.filter(item => item.name.toLowerCase().match(reg));
 
-    console.log(TypedText.length)
-
-    if (TypedText.length < 4){
+    //Only show 30 first results if user hasn't 
+    //typed more than 4 letters because list is too
+    //big to render
+    if (TypedText.length <= 4){
         filteredArray = filteredArray.slice(0, 30)
     }
     
@@ -20,10 +21,17 @@ export default function GameNameSuggestions({TypedText, updateSuggestionList}) {
         return <li key={subarray.appid}>{subarray.name}</li>
     })
 
-    
-    console.log(Tmp)
     updateSuggestionList(() => {
         return Tmp;
     })
     
+    SuggestiOn((previousStyle) => {
+        return {
+          ...previousStyle,
+          animation: "fadeIn 1s",
+          animationDelay: "0s",
+          animationFillMode: "forwards",
+          display: (filteredArray != null && TypedText != "")  ? "" : "none",
+        }
+    });
 }

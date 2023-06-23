@@ -25,11 +25,10 @@ let Suggestionsstyle = {
 };
 
 export default function SearchBar() {
-  
   const [isHoverd, FocusGain] = useState(style);
   const [Suggestions, SuggestiOn] = useState(Suggestionsstyle);
   const [TypedText, updateText] = useState("");
-  const [SuggestionList, updateSuggestionList] = useState(<li></li>);
+  const [SuggestionList, updateSuggestionList] = useState(null);
 
   function changeStyle() {
     FocusGain((previousStyle) => {
@@ -47,7 +46,11 @@ export default function SearchBar() {
         animation: "fadeIn 1s",
         animationDelay: "0s",
         animationFillMode: "forwards",
-        display: previousStyle.display === "none" ? "" : "none",
+        display:
+          (previousStyle.display === "none" && 
+          SuggestionList != null &&
+          TypedText != ""
+          ) ? "" : "none",
       };
     });
   }
@@ -69,6 +72,19 @@ export default function SearchBar() {
             GameNameSuggestions({
               TypedText,
               updateSuggestionList,
+              SuggestiOn,
+            });
+          }}
+          onKeyDown={() => {
+            SuggestiOn((previousStyle) => {
+              return {
+                ...previousStyle,
+                animation: "fadeIn 1s",
+                animationDelay: "0s",
+                animationFillMode: "forwards",
+                display:
+                  SuggestionList != null && TypedText != "" ? "" : "none",
+              };
             });
           }}
           onChange={handleChange}
