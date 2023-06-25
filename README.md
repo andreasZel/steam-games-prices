@@ -4,4 +4,4 @@ React, Go lang Practice.
 An app that displays steam prices in different platforms. 
 
 Preview:
-![alt text]([https://i.imgur.com/McTfJwF.png](https://i.imgur.com/lcXy8th.png)https://i.imgur.com/lcXy8th.png)
+![alt text](https://i.imgur.com/lcXy8th.png)
