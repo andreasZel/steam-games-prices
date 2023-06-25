@@ -2,6 +2,7 @@ import "../CSS/SearchBar.css";
 import SearchIcon from "../assets/search-icon.svg";
 
 import GameNameSuggestions from "../Functions/GameNameSuggestions.jsx";
+import CreateGame from "../Functions/CreateGame.jsx";
 import { useState } from "react";
 
 let style = {
@@ -19,12 +20,13 @@ let Suggestionsstyle = {
   backgroundColor: "#747e72",
   filter: "drop-shadow(0px 0px 12px rgba(0, 0, 0, 0.856))",
   overflowX: "hidden",
-  transition: "1s",
+  transition: "0.1s",
   overflowY: "scroll",
-  display: "none",
+  visibility: "hidden",
 };
 
-export default function SearchBar() {
+//might need to change props
+export default function SearchBar({ Swapwindow, ChangeGameInfo }) {
   const [isHoverd, FocusGain] = useState(style);
   const [Suggestions, SuggestiOn] = useState(Suggestionsstyle);
   const [TypedText, updateText] = useState("");
@@ -43,14 +45,15 @@ export default function SearchBar() {
     SuggestiOn((previousStyle) => {
       return {
         ...previousStyle,
-        animation: "fadeIn 1s",
+        animation: "fadeIn 0.1s",
         animationDelay: "0s",
         animationFillMode: "forwards",
-        display:
-          (previousStyle.display === "none" && 
+        visibility:
+          previousStyle.visibility === "hidden" &&
           SuggestionList != null &&
           TypedText != ""
-          ) ? "" : "none",
+            ? ""
+            : "hidden",
       };
     });
   }
@@ -73,19 +76,29 @@ export default function SearchBar() {
               TypedText,
               updateSuggestionList,
               SuggestiOn,
+              updateText,
             });
           }}
-          onKeyDown={() => {
+          onKeyDown={(event) => {
             SuggestiOn((previousStyle) => {
               return {
                 ...previousStyle,
-                animation: "fadeIn 1s",
+                animation: "fadeIn 0.1s",
                 animationDelay: "0s",
                 animationFillMode: "forwards",
-                display:
-                  SuggestionList != null && TypedText != "" ? "" : "none",
+                visibility:
+                  SuggestionList != null && TypedText != "" ? "" : "hidden",
               };
             });
+
+            if (event.key === "Enter") {
+              //might need to change props
+              CreateGame({ TypedText, ChangeGameInfo });
+
+              Swapwindow((prevVAlue) => {
+                return prevVAlue === false ? true : false;
+              });
+            }
           }}
           onChange={handleChange}
           type="text"
