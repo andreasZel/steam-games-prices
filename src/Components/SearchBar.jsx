@@ -26,11 +26,12 @@ let Suggestionsstyle = {
 };
 
 //might need to change props
-export default function SearchBar({ Swapwindow, ChangeGameInfo }) {
+export default function SearchBar({ Swapwindow, ChangeGameInfo, StoreComponents, UpdateStoreComponents }) {
   const [isHoverd, FocusGain] = useState(style);
   const [Suggestions, SuggestiOn] = useState(Suggestionsstyle);
   const [TypedText, updateText] = useState("");
   const [SuggestionList, updateSuggestionList] = useState(null);
+  const [onDisplay, changeDisplay] = useState(false);
 
   function changeStyle() {
     FocusGain((previousStyle) => {
@@ -92,12 +93,14 @@ export default function SearchBar({ Swapwindow, ChangeGameInfo }) {
             });
 
             if (event.key === "Enter") {
-              //might need to change props
-              CreateGame({ TypedText, ChangeGameInfo });
+              //! MIGHT NEED TWEAKING
+              if (onDisplay === false){
 
-              Swapwindow((prevVAlue) => {
-                return prevVAlue === false ? true : false;
-              });
+                let temp = CreateGame({ TypedText, ChangeGameInfo, StoreComponents, UpdateStoreComponents });
+
+                changeDisplay(() => {return temp})
+                Swapwindow(() => {return true});
+              }
             }
           }}
           onChange={handleChange}

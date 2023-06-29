@@ -16,6 +16,8 @@
 }
 
 .StoreIcon{
+    max-width: 65px;
+    max-height: 65px;
     margin-left: 20px;
     margin-top: 0%;
     margin-bottom: 0%;

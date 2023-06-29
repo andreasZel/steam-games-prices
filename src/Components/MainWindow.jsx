@@ -23,6 +23,7 @@ export default function MainWindow() {
         <SearchBar 
         Swapwindow={Swapwindow} 
         ChangeGameInfo={ChangeGameInfo}
+        StoreComponents={StoreComponents}
         UpdateStoreComponents={UpdateStoreComponents}
         />
         <SearchedGames SteamSavedGames={SteamSavedGames}/> 
@@ -34,10 +35,12 @@ export default function MainWindow() {
         <SearchBar 
         Swapwindow={Swapwindow}
         ChangeGameInfo={ChangeGameInfo}
+        StoreComponents={StoreComponents}
         UpdateStoreComponents={UpdateStoreComponents}
         />
         <GameInfoArea 
         GameInfo={GameInfo} 
+        StoreComponents={StoreComponents}
         />
       </div>
     );
