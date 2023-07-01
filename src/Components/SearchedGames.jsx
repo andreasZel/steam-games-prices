@@ -6,7 +6,7 @@ export default function SearchedGames(props) {
     <div className="SearchedGames">
       <h2 className="search_Title">Games Searched:</h2>
       <div className="Searched_Games_Area">
-      {props.SteamSavedGames}
+      {props.SteamSavedGames.length > 0 ? props.SteamSavedGames : "No Games Searched"}
       </div>
     </div>
   );

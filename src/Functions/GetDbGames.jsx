@@ -16,6 +16,7 @@ export default async function GetDbGames(props) {
     return (
       <SearchedGameTile
         key={index.id}
+        id={index.id}
         steam_appid={index.steam_appid}
         Game_Title={index.name}
         Searched_Games_Img={index.capsule_image}

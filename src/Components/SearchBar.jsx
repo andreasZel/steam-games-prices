@@ -26,7 +26,7 @@ let Suggestionsstyle = {
 };
 
 //might need to change props
-export default function SearchBar({ Swapwindow, ChangeGameInfo, StoreComponents, UpdateStoreComponents }) {
+export default function SearchBar({ Swapwindow, ChangeGameInfo, StoreComponents, UpdateStoreComponents}) {
   const [isHoverd, FocusGain] = useState(style);
   const [Suggestions, SuggestiOn] = useState(Suggestionsstyle);
   const [TypedText, updateText] = useState("");
@@ -81,22 +81,24 @@ export default function SearchBar({ Swapwindow, ChangeGameInfo, StoreComponents,
             });
           }}
           onKeyDown={(event) => {
-            SuggestiOn((previousStyle) => {
-              return {
-                ...previousStyle,
-                animation: "fadeIn 0.1s",
-                animationDelay: "0s",
-                animationFillMode: "forwards",
-                visibility:
-                  SuggestionList != null && TypedText != "" ? "" : "hidden",
-              };
-            });
-
             if (event.key === "Enter") {
-              //! MIGHT NEED TWEAKING
-              if (onDisplay === false){
+              SuggestiOn((previousStyle) => {
+                return {
+                  ...previousStyle,
+                  animation: "fadeIn 0.1s",
+                  animationDelay: "0s",
+                  animationFillMode: "forwards",
+                  visibility: "hidden", //! MIGHT NEED TWEAKING
+                };
+              });
 
-                let temp = CreateGame({ TypedText, ChangeGameInfo, StoreComponents, UpdateStoreComponents });
+              if (onDisplay === false) {
+                let temp = CreateGame({ 
+                  TypedText, 
+                  ChangeGameInfo, 
+                  StoreComponents, 
+                  UpdateStoreComponents
+                });
 
                 changeDisplay(() => {return temp})
                 Swapwindow(() => {return true});

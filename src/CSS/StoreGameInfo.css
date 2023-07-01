@@ -72,6 +72,7 @@
 .MetacriticScore {
   align-self: flex-end;
   margin: 0%;
+  font-size: 25px;
   margin-bottom: 3.5vh;
 }
 

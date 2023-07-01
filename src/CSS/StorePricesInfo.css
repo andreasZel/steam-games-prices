@@ -54,8 +54,8 @@
     justify-self: center;
     align-self: flex-end;
     display: grid;
-    grid-auto-rows: 1fr;
+    align-items: center;
+    grid-auto-rows: 0.2fr;
     overflow-y: scroll;
     overflow-x: hidden;
-    grid-row-gap: 15px;
 } 

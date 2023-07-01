@@ -13,6 +13,8 @@
     margin-left: auto;
     margin-bottom: 0%;
     margin-top: 0%;
+    font-size: 28px;
+    color:rgb(253, 255, 255)
 }
 
 .StoreIcon{
@@ -48,3 +50,33 @@
     font-size: 22px;
     font-weight: 800;
 }
+
+.highcharts-plot-background {
+    fill: #677891!important;
+  }
+  .highcharts-plot-border {
+    border-radius: 10px;
+  }
+  .highcharts-background {
+    fill: #303030;
+  }
+  
+  .highcharts-axis-title, .highcharts-title, .highcharts-axis-labels text, .highcharts-legend text {
+    fill: white!important;
+  }
+  
+  .highcharts-legend text:hover {
+    fill: rgb(173, 173, 173)!important;
+  }
+  
+  .highcharts-label-box{
+    fill: #303030!important;
+  }
+  
+  .highcharts-tooltip-header {
+    fill: white!important;
+  }
+  
+  .highcharts-label text{ 
+    fill: white!important;
+  }

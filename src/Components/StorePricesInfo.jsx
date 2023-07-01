@@ -16,7 +16,7 @@ export default function StorePricesInfo(props) {
           props.windows == true ?mac_supported : mac_not_supported} />
       </div>
       <div className="SalesStoresArea">
-        <div className="Price_Diagram"></div>
+        <div className="Price_Diagram">{props.chart}</div>
         <div className="Stores">
           {props.StoreComponents}
         </div>

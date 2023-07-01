@@ -3,19 +3,20 @@ import GameNameAndIdS from "../assets/GameNameAndIdS.js";
 import StorePricesInfo from "../Components/StorePricesInfo.jsx";
 import StoreGameInfo from "../Components/StoreGameInfo.jsx";
 import StoreComponent from "../Components/StoreComponent.jsx";
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
 
 const BASE_URL = "http://localhost:3333/";
 
 export default async function CreateGame({ 
   TypedText, 
   ChangeGameInfo,
-  UpdateStoreComponents,
-  chart,
-  changeChart 
+  UpdateStoreComponents
 }) {
 
   var TempGame;
   var TempDeal;
+  var GameExistsInDb = false;
 
   var Game = GameNameAndIdS.find(function (item) {
     return item.name.toLowerCase() === TypedText.toLowerCase();
@@ -28,15 +29,28 @@ export default async function CreateGame({
     GameId: Game.appid.toString(),
   };
 
+  await axios.get(`${BASE_URL}SteamGames/`).then((response) => {
+    let gamesInDb = response;
+    console.log(gamesInDb);
+    if (gamesInDb.data != null) {
+      for (let i = 0; i < gamesInDb.data.length; i++){
+        if (Game.appid.toString() === gamesInDb.data[i].steam_appid)
+          GameExistsInDb = true;
+      }
+    }
+  });
+
+  console.log(GameExistsInDb)
+  
   await axios
-    .post(`${BASE_URL}SteamGames/CreateGame/`, GameId)
+    .post(`${BASE_URL}SteamGames/${GameExistsInDb === false ? "CreateGame/" : "UpdateGame/"}`, GameId)
     .then((response) => {
       TempGame = response.data;
     })
     .catch((error) => {
       if (error.response === 400) 
         return false;
-    });
+  });
 
   var GameObjectId = {
     GameId: TempGame.id,
@@ -61,7 +75,7 @@ export default async function CreateGame({
     return <img key={index} className="screenshot_imge" alt="screenshot" src={index}/>
   })
 
-  var gameDeals = [[], [], []]
+  var gameDeals = [[], [], [[]]]
   
   console.log(TempDeal);
 
@@ -77,11 +91,61 @@ export default async function CreateGame({
   })
 
   gameDeals[2] = TempDeal.deals.map((index) => {
-    const dateObject = new Date(parseInt(index.date)*1000);
-    const humanDateFormat = dateObject.toLocaleString("en-US")
-
-    return humanDateFormat;
+    return [parseInt(index.date)*1000, parseFloat(index.retailPrice)];
   })
+
+  console.log(gameDeals[2])
+
+  const options = {
+    rangeSelector: {
+      selected: 1
+    },
+    title: {
+      text: TempGame.name
+    },
+    xAxis:[{
+      labels:{
+         formatter:function(){
+             return Highcharts.dateFormat('%Y/%M/%d',this.value);
+         }
+      }
+    }],
+    yAxis: {
+      title: {
+        text: 'Price'
+      },
+      labels: {
+        formatter: function() {
+          return this.value + ' €';
+        }
+      },
+      plotLines: [{
+        value: 0,
+        width: 2,
+        color: 'silver'
+      }]
+    },
+    tooltip: {
+      pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}€)<br/>',
+      valueDecimals: 2,
+      split: true
+    },
+    series: {
+      // general options for all series
+      compare: 'value',
+      showInNavigator: true,
+    },
+    series: [{
+      name: "price",
+      data: gameDeals[2]
+    }]
+  }
+
+  let pass_chart = (
+    <HighchartsReact
+    highcharts={Highcharts}
+    options={options} />
+  );
   
   var StoreTitles = [
     "Steam", "GamersGate", "GreenManGaming", "Amazon", "GameStop", "Direct2Drive", "GOG",
@@ -91,7 +155,6 @@ export default async function CreateGame({
     "Gamesplanet", "Gamesload", "TwoGame", "IndieGala", "Blizzard_Shop", "AllYouPlay", "DLGamer", "Noctre",
     "DreamGame", "Eneba", "kinguin", "allkeyshop"
   ]
-
 
   let Stores = [];
 
@@ -107,9 +170,6 @@ export default async function CreateGame({
 
   console.log(Stores);
 
-  
- 
-
 var Tmp = (
   <>
     <StoreGameInfo 
@@ -123,7 +183,7 @@ var Tmp = (
     />
     <StorePricesInfo 
     StoreComponents={Stores}
-    chart={chart}
+    chart={pass_chart}
     />
   </>
   );

@@ -17,6 +17,7 @@ export default function MainWindow() {
   useEffect(() => {
     GetDbGames({addremoveGames})
   }, []);
+
   if(DidSearch === false){
     return (
       <div className="MainWindow">
