@@ -4,9 +4,17 @@ import SteamLogo from "../assets/steamlogo.svg";
 
 const BASE_URL = "http://localhost:3333/";
 
-export default async function GetDbGames(props) {
+export default async function GetDbGames({
+  addremoveGames,  
+  Swapwindow, 
+  onDisplay, 
+  changeDisplay,
+  ChangeGameInfo,
+  StoreComponents,
+  UpdateStoreComponents,
+  changeloadingState
+}) {
   var TempGames;
-  var suggestions;
 
   await axios.get(`${BASE_URL}SteamGames/`).then((response) => {
     TempGames = response;
@@ -16,17 +24,24 @@ export default async function GetDbGames(props) {
     return (
       <SearchedGameTile
         key={index.id}
+        Swapwindow={Swapwindow}
+        onDisplay={onDisplay}
+        changeDisplay={changeDisplay}
+        ChangeGameInfo={ChangeGameInfo}
+        StoreComponents={StoreComponents}
+        UpdateStoreComponents={UpdateStoreComponents}
         id={index.id}
         steam_appid={index.steam_appid}
         Game_Title={index.name}
         Searched_Games_Img={index.capsule_image}
         Game_Price={index.price[0].priceOnDate}
         Store_Img={SteamLogo}
+        changeloadingState={changeloadingState}
       />
     );
   });
 
-  props.addremoveGames(() => {
+  addremoveGames(() => {
     return Tmp;
   });
 }
