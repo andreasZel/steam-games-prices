@@ -12,7 +12,8 @@ export default async function GetDbGames({
   ChangeGameInfo,
   StoreComponents,
   UpdateStoreComponents,
-  changeloadingState
+  setloading,
+  loading
 }) {
   var TempGames;
 
@@ -36,7 +37,8 @@ export default async function GetDbGames({
         Searched_Games_Img={index.capsule_image}
         Game_Price={index.price[0].priceOnDate}
         Store_Img={SteamLogo}
-        changeloadingState={changeloadingState}
+        setloading={setloading}
+        loading={loading}
       />
     );
   });

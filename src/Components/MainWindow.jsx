@@ -18,6 +18,12 @@ export default function MainWindow() {
   const [onDisplay, changeDisplay] = useState(false);
   const [loading, changeloadingState] = useState(false);
 
+  function setloading(state){
+    changeloadingState(() => {
+      return state;
+    });
+  }
+
   useEffect(() => {
     GetDbGames({
       addremoveGames,
@@ -27,9 +33,10 @@ export default function MainWindow() {
       ChangeGameInfo,
       StoreComponents,
       UpdateStoreComponents,
-      changeloadingState
+      setloading,
+      loading
     })
-  }, [loading]);
+  }, []);
 
   if (loading === true){
     return (
@@ -41,7 +48,8 @@ export default function MainWindow() {
         UpdateStoreComponents={UpdateStoreComponents}
         onDisplay={onDisplay}
         changeDisplay={() => {changeDisplay}}
-        changeloadingState={changeloadingState}
+        setloading={() => {setloading}}
+        loading={loading}
         />
         <Loading />
       </div>
@@ -56,11 +64,13 @@ export default function MainWindow() {
         UpdateStoreComponents={UpdateStoreComponents}
         onDisplay={onDisplay}
         changeDisplay={() => {changeDisplay}}
-        changeloadingState={changeloadingState}
+        setloading={() => {setloading}}
+        loading={loading}
         />
         <SearchedGames 
         SteamSavedGames={SteamSavedGames}
-        changeloadingState={changeloadingState}
+        setloading={() => {setloading}}
+        loading={loading}
         /> 
       </div>
     );
@@ -74,7 +84,8 @@ export default function MainWindow() {
         UpdateStoreComponents={UpdateStoreComponents}
         onDisplay={onDisplay}
         changeDisplay={() => {changeDisplay}}
-        changeloadingState={changeloadingState}
+        setloading={() => {setloading}}
+        loading={loading}
         />
         <GameInfoArea 
         GameInfo={GameInfo} 

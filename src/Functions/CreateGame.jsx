@@ -69,7 +69,7 @@ export default async function CreateGame({
   var Developers = TempGame.developers.join(", "); 
   var publishers = TempGame.publishers.join(", ");
   var genres = TempGame.genres.join(" | ");
-  var metacritic = TempGame.metacritic == "false" ? "No Score" : TempGame.metacritic;
+  var metacritic = TempGame.metacritic == "false" ? "No Score" : TempGame.metacritic[0];
 
   var screenshots = TempGame.screenshots.map((index) => {
     return <img key={index} className="screenshot_imge" alt="screenshot" src={index}/>
@@ -157,15 +157,18 @@ export default async function CreateGame({
   ]
 
   let Stores = [];
+  const timestampMillis = Date.now();
 
   for (let index = 0; index < gameDeals[0].length; index++){
+    //if (timestampMillis === gameDeals[2][index][0]) {
     Stores.push(
       <StoreComponent
-        key={gameDeals[0][index]}
+        key={index}
         storeTitle={StoreTitles[gameDeals[0][index]]}
         price={gameDeals[1][index]}
         />
       );
+    //}
   }
 
   console.log(Stores);

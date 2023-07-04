@@ -55,25 +55,33 @@
 
 .GenreScoreArea {
   grid-row: 1;
+  width: 80%;
   display: flex;
   grid-column: 1;
   position: relative;
   align-self: flex-end;
-  justify-content: center;
+  justify-content: flex-start;
   align-content: flex-end;
+  margin-left: 30px;
   z-index: 2;
   color: aliceblue;
   width: 100%;
   height: 120px;
-  justify-self: end;
+  justify-self: flex-start;
 }
 
 .Genre,
 .MetacriticScore {
   align-self: flex-end;
+  margin-right: 40px;
   margin: 0%;
-  font-size: 25px;
+  font-size: 20px;
   margin-bottom: 3.5vh;
+}
+
+.MetacriticScore{
+  font-size: 35px;
+  margin-left: 30px;
 }
 
 .Genre {

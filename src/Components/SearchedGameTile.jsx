@@ -15,7 +15,8 @@ Game_Title,
 Searched_Games_Img,
 Game_Price,
 Store_Img,
-changeloadingState
+setloading,
+loading
 }) {
   var TypedText = Game_Title;
 
@@ -23,7 +24,8 @@ changeloadingState
     <div className="SearchedGameTile" id={id} onClick={() => {
       if (onDisplay === false) {
       
-        changeloadingState(() => true);
+        setloading(true);
+        console.log(loading);
 
         let temp = CreateGame({ 
           TypedText, 
@@ -31,9 +33,10 @@ changeloadingState
           UpdateStoreComponents
         }).then(() => {
           
-          changeloadingState(() => false);
-
+          setloading(false);
+          console.log(loading);
           console.log(temp);
+          
           changeDisplay(() => {return temp})
           Swapwindow(() => {return true});
           console.log(StoreComponents);
