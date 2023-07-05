@@ -11,7 +11,9 @@ const BASE_URL = "http://localhost:3333/";
 export default async function CreateGame({ 
   TypedText, 
   ChangeGameInfo,
-  UpdateStoreComponents
+  UpdateStoreComponents,
+  setCapability,
+  Platforms
 }) {
 
   var TempGame;
@@ -75,14 +77,32 @@ export default async function CreateGame({
     return <img key={index} className="screenshot_imge" alt="screenshot" src={index}/>
   })
 
-  var gameDeals = [[], [], [[]]]
-  
+  var gameDeals = [[], []]
+  var seriesForChart = [];
+  var series_options = [];
+
+  var StoreTitles = [
+    "Steam", "GamersGate", "GreenManGaming", "Amazon", "GameStop", "Direct2Drive", "GOG",
+    "Origin", "Get_Games", "Shiny_Loot", "Humble_Store", "Desura", "Uplay", "IndieGameStand",
+    "Fanatical", "Gamesrocket", "Games_Republic", "SilaGames", "Playfield", "ImperialGames",
+    "WinGameStore", "FunStockDigital", "GameBillet", "Voidu", "Epic_Games_Store", "Razer_Game_Store",  
+    "Gamesplanet", "Gamesload", "TwoGame", "IndieGala", "Blizzard_Shop", "AllYouPlay", "DLGamer", "Noctre",
+    "DreamGame", "Eneba", "kinguin", "allkeyshop"
+  ]
+
   console.log(TempDeal);
+  console.log(TempGame);
 
   if(TempDeal.deals === null)
     return false;
 
+  var uniqueStores = [TempDeal.deals[0].storeId];
+
   gameDeals[0] = TempDeal.deals.map((index) => {
+    
+    if (!uniqueStores.includes(index.storeId))
+      uniqueStores.push(index.storeId);
+
     return parseInt(index.storeId);
   })
 
@@ -90,11 +110,22 @@ export default async function CreateGame({
     return parseFloat(index.retailPrice);
   })
 
-  gameDeals[2] = TempDeal.deals.map((index) => {
-    return [parseInt(index.date)*1000, parseFloat(index.retailPrice)];
+  for (let z = 0; z < uniqueStores.length; z++){
+    seriesForChart[parseInt(uniqueStores[z])] = [];
+  }
+
+  TempDeal.deals.map((index) => {
+    seriesForChart[parseInt(index.storeId)].push([parseInt(index.date)*1000, parseFloat(index.retailPrice)]);
   })
 
-  console.log(gameDeals[2])
+  for (let z = 0; z < uniqueStores.length; z++){
+    series_options[z] = {
+      name: StoreTitles[uniqueStores[z]],
+      data: seriesForChart[parseInt(uniqueStores[z])],
+    };
+  }
+
+  console.log(seriesForChart)
 
   const options = {
     rangeSelector: {
@@ -106,7 +137,7 @@ export default async function CreateGame({
     xAxis:[{
       labels:{
          formatter:function(){
-             return Highcharts.dateFormat('%Y/%M/%d',this.value);
+             return Highcharts.dateFormat('%d/%M/%Y',this.value);
          }
       }
     }],
@@ -135,27 +166,17 @@ export default async function CreateGame({
       compare: 'value',
       showInNavigator: true,
     },
-    series: [{
-      name: "price",
-      data: gameDeals[2]
-    }]
+    series: series_options
   }
 
+  
+  
   let pass_chart = (
     <HighchartsReact
     highcharts={Highcharts}
     options={options} />
   );
   
-  var StoreTitles = [
-    "Steam", "GamersGate", "GreenManGaming", "Amazon", "GameStop", "Direct2Drive", "GOG",
-    "Origin", "Get_Games", "Shiny_Loot", "Humble_Store", "Desura", "Uplay", "IndieGameStand",
-    "Fanatical", "Gamesrocket", "Games_Republic", "SilaGames", "Playfield", "ImperialGames",
-    "WinGameStore", "FunStockDigital", "GameBillet", "Voidu", "Epic_Games_Store", "Razer_Game_Store",  
-    "Gamesplanet", "Gamesload", "TwoGame", "IndieGala", "Blizzard_Shop", "AllYouPlay", "DLGamer", "Noctre",
-    "DreamGame", "Eneba", "kinguin", "allkeyshop"
-  ]
-
   let Stores = [];
   const timestampMillis = Date.now();
 
@@ -187,6 +208,7 @@ var Tmp = (
     <StorePricesInfo 
     StoreComponents={Stores}
     chart={pass_chart}
+    Platforms={Platforms}
     />
   </>
   );
@@ -195,6 +217,7 @@ var Tmp = (
     return Tmp;
   });
 
+  setCapability(TempGame.platforms)
   UpdateStoreComponents(()=>{return Stores});
 
   return true;

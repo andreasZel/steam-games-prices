@@ -43,7 +43,7 @@ export default function StoreComponent(props) {
     <div className="StoreComponent">
       <img className="StoreIcon" alt="Store Icon" src={`src/assets/`+props.storeTitle+`.svg`}/>
       <h2 className="TitleofStore"> {props.storeTitle}</h2>
-      <h1 className="StoreGamePrice"> {props.price} </h1>
+      <h1 className="StoreGamePrice"> {props.price} €</h1>
       <button className="VisitStoreBtn">Go</button>
     </div>
   );

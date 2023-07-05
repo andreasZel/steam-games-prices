@@ -26,7 +26,18 @@ let Suggestionsstyle = {
 };
 
 //might need to change props
-export default function SearchBar({ Swapwindow, ChangeGameInfo, StoreComponents, UpdateStoreComponents, onDisplay, changeDisplay, setloading}) {
+export default function SearchBar({ 
+  Swapwindow, 
+  ChangeGameInfo, 
+  StoreComponents, 
+  UpdateStoreComponents, 
+  onDisplay, 
+  changeDisplay, 
+  setloading, 
+  setCapability,
+  Platforms
+}) {
+
   const [isHoverd, FocusGain] = useState(style);
   const [Suggestions, SuggestiOn] = useState(Suggestionsstyle);
   const [TypedText, updateText] = useState("");
@@ -101,7 +112,9 @@ export default function SearchBar({ Swapwindow, ChangeGameInfo, StoreComponents,
                   TypedText, 
                   ChangeGameInfo, 
                   StoreComponents, 
-                  UpdateStoreComponents
+                  UpdateStoreComponents,
+                  setCapability,
+                  Platforms
                 }).then( () => {
 
                   setloading(false);

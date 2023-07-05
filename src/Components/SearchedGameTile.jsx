@@ -16,7 +16,9 @@ Searched_Games_Img,
 Game_Price,
 Store_Img,
 setloading,
-loading
+loading,
+setCapability,
+Platforms
 }) {
   var TypedText = Game_Title;
 
@@ -30,7 +32,9 @@ loading
         let temp = CreateGame({ 
           TypedText, 
           ChangeGameInfo, 
-          UpdateStoreComponents
+          UpdateStoreComponents,
+          setCapability,
+          Platforms
         }).then(() => {
           
           setloading(false);
