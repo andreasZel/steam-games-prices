@@ -53,7 +53,7 @@ export default function MainWindow() {
       setCapability,
       Platforms
     })
-  }, []);
+  }, [loading]);
 
   if (loading === true){
     return (
@@ -65,7 +65,7 @@ export default function MainWindow() {
         UpdateStoreComponents={UpdateStoreComponents}
         onDisplay={onDisplay}
         changeDisplay={() => {changeDisplay}}
-        setloading={() => {setloading}}
+        changeloadingState={changeloadingState}
         loading={loading}
         setCapability={setCapability}
         Platforms={Platforms}
@@ -83,7 +83,7 @@ export default function MainWindow() {
         UpdateStoreComponents={UpdateStoreComponents}
         onDisplay={onDisplay}
         changeDisplay={() => {changeDisplay}}
-        setloading={() => {setloading}}
+        changeloadingState={changeloadingState}
         loading={loading}
         setCapability={setCapability}
         Platforms={Platforms}
@@ -105,7 +105,7 @@ export default function MainWindow() {
         UpdateStoreComponents={UpdateStoreComponents}
         onDisplay={onDisplay}
         changeDisplay={() => {changeDisplay}}
-        setloading={() => {setloading}}
+        changeloadingState={changeloadingState}
         loading={loading}
         setCapability={setCapability}
         Platforms={Platforms}

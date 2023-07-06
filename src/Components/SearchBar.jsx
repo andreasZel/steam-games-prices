@@ -33,7 +33,8 @@ export default function SearchBar({
   UpdateStoreComponents, 
   onDisplay, 
   changeDisplay, 
-  setloading, 
+  loading, 
+  changeloadingState,
   setCapability,
   Platforms
 }) {
@@ -104,8 +105,8 @@ export default function SearchBar({
               });
 
               if (onDisplay === false) {
-
-                setloading(true);
+                
+                changeloadingState(() => {return true});
                 console.log(loading);
 
                 let temp = CreateGame({ 
@@ -116,8 +117,8 @@ export default function SearchBar({
                   setCapability,
                   Platforms
                 }).then( () => {
-
-                  setloading(false);
+                  
+                  changeloadingState(() => {return false});
                   console.log(loading);
                   
                   changeDisplay(() => {return temp})

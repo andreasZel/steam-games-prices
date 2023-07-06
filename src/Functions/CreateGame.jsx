@@ -5,6 +5,7 @@ import StoreGameInfo from "../Components/StoreGameInfo.jsx";
 import StoreComponent from "../Components/StoreComponent.jsx";
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import moment from 'moment/moment.js';
 
 const BASE_URL = "http://localhost:3333/";
 
@@ -106,7 +107,9 @@ export default async function CreateGame({
     return parseInt(index.storeId);
   })
 
+  var timestamps = [];
   gameDeals[1] = TempDeal.deals.map((index) => {
+    timestamps.push(moment.unix(parseInt(index.date))._i)
     return parseFloat(index.retailPrice);
   })
 
@@ -115,7 +118,7 @@ export default async function CreateGame({
   }
 
   TempDeal.deals.map((index) => {
-    seriesForChart[parseInt(index.storeId)].push([parseInt(index.date)*1000, parseFloat(index.retailPrice)]);
+    seriesForChart[parseInt(index.storeId)].push([moment.unix(parseInt(index.date))._i, parseFloat(index.retailPrice)]);
   })
 
   for (let z = 0; z < uniqueStores.length; z++){
@@ -137,7 +140,7 @@ export default async function CreateGame({
     xAxis:[{
       labels:{
          formatter:function(){
-             return Highcharts.dateFormat('%d/%M/%Y',this.value);
+             return Highcharts.dateFormat('%d/%m/%Y',this.value);
          }
       }
     }],
@@ -179,17 +182,19 @@ export default async function CreateGame({
   
   let Stores = [];
   const timestampMillis = Date.now();
-
+  
   for (let index = 0; index < gameDeals[0].length; index++){
-    //if (timestampMillis === gameDeals[2][index][0]) {
-    Stores.push(
-      <StoreComponent
-        key={index}
-        storeTitle={StoreTitles[gameDeals[0][index]]}
-        price={gameDeals[1][index]}
-        />
-      );
-    //}
+    
+    if ((String((timestampMillis))).slice(0, 6) === (String(timestamps[index])).slice(0, 6)) {
+      Stores.push(
+        <StoreComponent
+          key={index}
+          storeTitle={StoreTitles[gameDeals[0][index]]}
+          price={gameDeals[1][index]}
+          />
+        );
+    }
+    
   }
 
   console.log(Stores);
