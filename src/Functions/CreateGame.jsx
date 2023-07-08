@@ -91,6 +91,20 @@ export default async function CreateGame({
     "DreamGame", "Eneba", "kinguin", "allkeyshop"
   ]
 
+  var StoreLinks = [
+    "https://store.steampowered.com/", "https://www.gamersgate.com/offers/","https://www.greenmangaming.com/", 
+    "https://www.amazon.com/pc-games/", "https://www.gamestop.com/video-games/pc-games", "https://www.direct2drive.com/",
+    "https://www.gog.com/", "https://www.ea.com/games/library/pc-download", "https://getgames.bumpa.shop/", 
+    "https://shinyloot.com/", "https://www.humblebundle.com/store", "https://www.desura.com/", "https://ubisoftconnect.com/",
+    "http://indiegamestand.com/", "https://www.fanatical.com/", "https://gamesrocket.com/eu/", "https://gamesrepublic.com/",
+    "https://store.silagames.com/", "https://www.facebook.com/playfieldgame/", "https://imperial.games/",
+    "https://www.wingamestore.com/", "https://funstock.co.uk/", "https://www.gamebillet.com/", "https://www.voidu.com/en/",
+    "https://store.epicgames.com/en-US/", "https://www.razer.com/gamestore/", "https://us.gamesplanet.com/", "https://www.gamesload.eu/home.html",
+    "https://2game.com/gr/", "https://www.indiegala.com/", "https://eu.shop.battle.net/en-gb", "https://www.allyouplay.com/", 
+    "https://www.dlgamer.com/us/", "https://www.noctre.com/", "https://www.dreamgame.com/en/", "https://www.eneba.com/el/", 
+    "https://www.kinguin.net/", "https://www.allkeyshop.com/"
+  ]
+
   console.log(TempDeal);
   console.log(TempGame);
 
@@ -191,6 +205,7 @@ export default async function CreateGame({
           key={index}
           storeTitle={StoreTitles[gameDeals[0][index]]}
           price={gameDeals[1][index]}
+          StoreLinks={StoreLinks[gameDeals[0][index]]}
           />
         );
     }

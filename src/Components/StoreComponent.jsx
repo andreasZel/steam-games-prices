@@ -39,12 +39,16 @@ import DLGamer from "../assets/DLGamer.svg";
 import Noctre from "../assets/Noctre.svg";  
 
 export default function StoreComponent(props) {
+  function btnClick() {
+    window.open(props.StoreLinks);
+  }
+  
   return (
     <div className="StoreComponent">
       <img className="StoreIcon" alt="Store Icon" src={`src/assets/`+props.storeTitle+`.svg`}/>
       <h2 className="TitleofStore"> {props.storeTitle}</h2>
       <h1 className="StoreGamePrice"> {props.price} €</h1>
-      <button className="VisitStoreBtn">Go</button>
+      <button className="VisitStoreBtn" onClick={btnClick} target="_blank">Go</button>
     </div>
   );
 }
