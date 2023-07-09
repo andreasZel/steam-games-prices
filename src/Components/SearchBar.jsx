@@ -94,6 +94,11 @@ export default function SearchBar({
           onKeyDown={(event) => {
             if (event.key === "Enter") {
               
+              changeloadingState(() => {return true});
+              console.log(loading);
+
+              changeDisplay(() => {return false})
+
               SuggestiOn((previousStyle) => {
                 return {
                   ...previousStyle,
@@ -104,27 +109,27 @@ export default function SearchBar({
                 };
               });
 
-              if (onDisplay === false) {
+              //if (onDisplay === false) {
                 
-                changeloadingState(() => {return true});
-                console.log(loading);
-
                 let temp = CreateGame({ 
                   TypedText, 
                   ChangeGameInfo, 
                   StoreComponents, 
                   UpdateStoreComponents,
                   setCapability,
-                  Platforms
+                  Platforms,
+                  Swapwindow,
+                  changeDisplay,
+                  onDisplay
                 }).then( () => {
                   
                   changeloadingState(() => {return false});
                   console.log(loading);
                   
-                  changeDisplay(() => {return temp})
+                  //changeDisplay(() => {return temp})
                   Swapwindow(() => {return true});
                 });
-              }
+              //}
             }
           }}
           onChange={handleChange}

@@ -24,7 +24,7 @@ Platforms
 
   return (
     <div className="SearchedGameTile" id={id} onClick={() => {
-      if (onDisplay === false) {
+      //if (onDisplay === false) {
       
         setloading(true);
         console.log(loading);
@@ -32,9 +32,13 @@ Platforms
         let temp = CreateGame({ 
           TypedText, 
           ChangeGameInfo, 
+          StoreComponents,
           UpdateStoreComponents,
           setCapability,
-          Platforms
+          Platforms,
+          Swapwindow,
+          changeDisplay,
+          onDisplay
         }).then(() => {
           
           setloading(false);
@@ -46,7 +50,8 @@ Platforms
           console.log(StoreComponents);
         }).catch((error)=>{console.log(error)});
       }
-      }}>
+      //}
+    }>
       <h3 className="Game_Title">{Game_Title}</h3>
       <img
         className="Searched_Games_Img"

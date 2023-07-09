@@ -14,7 +14,10 @@ export default async function CreateGame({
   ChangeGameInfo,
   UpdateStoreComponents,
   setCapability,
-  Platforms
+  Platforms,
+  Swapwindow,
+  changeDisplay,
+  onDisplay
 }) {
 
   var TempGame;
@@ -229,6 +232,9 @@ var Tmp = (
     StoreComponents={Stores}
     chart={pass_chart}
     Platforms={Platforms}
+    Swapwindow={Swapwindow}
+    changeDisplay={changeDisplay}
+    onDisplay={onDisplay}
     />
   </>
   );
