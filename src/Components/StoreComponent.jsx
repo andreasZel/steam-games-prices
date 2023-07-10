@@ -42,10 +42,11 @@ export default function StoreComponent(props) {
   function btnClick() {
     window.open(props.StoreLinks);
   }
-  
+  var storeIcon = props.storeTitle === "Steam" ? "steamlogo" : props.storeTitle;
+
   return (
     <div className="StoreComponent">
-      <img className="StoreIcon" alt="Store Icon" src={`src/assets/`+props.storeTitle+`.svg`}/>
+      <img className="StoreIcon" alt="Store Icon" src={`src/assets/`+storeIcon+`.svg`}/>
       <h2 className="TitleofStore"> {props.storeTitle}</h2>
       <h1 className="StoreGamePrice"> {props.price} €</h1>
       <button className="VisitStoreBtn" onClick={btnClick} target="_blank">Go</button>

@@ -72,10 +72,21 @@ export default async function CreateGame({
         return false;
     });
 
-  var Developers = TempGame.developers.join(", "); 
-  var publishers = TempGame.publishers.join(", ");
-  var genres = TempGame.genres.join(" | ");
-  var metacritic = TempGame.metacritic == "false" ? "No Score" : TempGame.metacritic[0];
+    var Developers = "";
+    var publishers = "";
+    var genres = "";
+    var metacritic = "";
+
+    if (TempGame.developers != null)
+      Developers = TempGame.developers.join(", "); 
+
+    if (TempGame.publishers != null)
+      publishers = TempGame.publishers.join(", ");
+
+    if (TempGame.genres != null)  
+      genres = TempGame.genres.join(" | ");
+
+    metacritic = TempGame.metacritic == "false" ? "No" : TempGame.metacritic[0];
 
   var screenshots = TempGame.screenshots.map((index) => {
     return <img key={index} className="screenshot_imge" alt="screenshot" src={index}/>
@@ -108,41 +119,58 @@ export default async function CreateGame({
     "https://www.kinguin.net/", "https://www.allkeyshop.com/"
   ]
 
+  let Stores = [];
+  const timestampMillis = Date.now();
+
   console.log(TempDeal);
   console.log(TempGame);
 
-  if(TempDeal.deals === null)
-    return false;
+  if(TempDeal.deals != null) {
 
-  var uniqueStores = [TempDeal.deals[0].storeId];
+    var uniqueStores = [TempDeal.deals[0].storeId];
 
-  gameDeals[0] = TempDeal.deals.map((index) => {
-    
-    if (!uniqueStores.includes(index.storeId))
-      uniqueStores.push(index.storeId);
+    gameDeals[0] = TempDeal.deals.map((index) => {
+      
+      if (!uniqueStores.includes(index.storeId))
+        uniqueStores.push(index.storeId);
 
-    return parseInt(index.storeId);
-  })
+      return parseInt(index.storeId);
+    })
 
-  var timestamps = [];
-  gameDeals[1] = TempDeal.deals.map((index) => {
-    timestamps.push(moment.unix(parseInt(index.date))._i)
-    return parseFloat(index.retailPrice);
-  })
+    var timestamps = [];
+    gameDeals[1] = TempDeal.deals.map((index) => {
+      timestamps.push(moment.unix(parseInt(index.date))._i)
+      return parseFloat(index.retailPrice);
+    })
 
-  for (let z = 0; z < uniqueStores.length; z++){
-    seriesForChart[parseInt(uniqueStores[z])] = [];
-  }
+    for (let z = 0; z < uniqueStores.length; z++){
+      seriesForChart[parseInt(uniqueStores[z])] = [];
+    }
 
-  TempDeal.deals.map((index) => {
-    seriesForChart[parseInt(index.storeId)].push([moment.unix(parseInt(index.date))._i, parseFloat(index.retailPrice)]);
-  })
+    TempDeal.deals.map((index) => {
+      seriesForChart[parseInt(index.storeId)].push([moment.unix(parseInt(index.date))._i, parseFloat(index.retailPrice)]);
+    })
 
-  for (let z = 0; z < uniqueStores.length; z++){
-    series_options[z] = {
-      name: StoreTitles[uniqueStores[z]],
-      data: seriesForChart[parseInt(uniqueStores[z])],
+    for (let z = 0; z < uniqueStores.length; z++){
+      series_options[z] = {
+        name: StoreTitles[uniqueStores[z]],
+        data: seriesForChart[parseInt(uniqueStores[z])],
+      };
+    }
+  }else {
+    series_options[0] = {
+      name: "Steam",
+      data: [[timestampMillis, 0]],
     };
+
+    Stores.push(
+      <StoreComponent
+        key={0}
+        storeTitle={"Steam"}
+        price={"free"}
+        StoreLinks={StoreLinks[0]}
+        />
+      );
   }
 
   console.log(seriesForChart)
@@ -189,17 +217,12 @@ export default async function CreateGame({
     series: series_options
   }
 
-  
-  
   let pass_chart = (
     <HighchartsReact
     highcharts={Highcharts}
     options={options} />
   );
-  
-  let Stores = [];
-  const timestampMillis = Date.now();
-  
+
   for (let index = 0; index < gameDeals[0].length; index++){
     
     if ((String((timestampMillis))).slice(0, 6) === (String(timestamps[index])).slice(0, 6)) {

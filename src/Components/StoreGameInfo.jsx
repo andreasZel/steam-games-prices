@@ -18,7 +18,6 @@ export default function StoreGameInfo(props) {
           />
           <div className="GenreScoreArea">
             <h4 className="Genre">{props.genres}</h4>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
             <h1 className="MetacriticScore">{props.metacritic}</h1>
           </div>
         </div>
