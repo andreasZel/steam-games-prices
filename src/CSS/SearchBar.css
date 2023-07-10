@@ -37,15 +37,23 @@ input:focus {
   outline: none;
 }
 
+.Search_suggestions {
+  background-color: #596166!important;
+  padding-left: 0%!important;
+}
+
 .SuggestionUl {
-  padding:0%;
+  margin:0%;
+  padding-top: 15px;
+  color: aliceblue;
   list-style-type: none;
   width: 100%;
   transition: 0.1s;
+  background-color: #596166;
 }
 
 .SuggestionUl li:hover {
-  background-color: #d8d4cf;
+  background-color: #313438;
 }
 
 @keyframes fadeIn {
