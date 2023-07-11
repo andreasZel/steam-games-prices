@@ -109,27 +109,29 @@ export default function SearchBar({
                 };
               });
 
-              //if (onDisplay === false) {
+              let temp = CreateGame({ 
+                TypedText, 
+                ChangeGameInfo, 
+                StoreComponents, 
+                UpdateStoreComponents,
+                setCapability,
+                Platforms,
+                Swapwindow,
+                changeDisplay,
+                onDisplay
+              }).then( (result) => {
                 
-                let temp = CreateGame({ 
-                  TypedText, 
-                  ChangeGameInfo, 
-                  StoreComponents, 
-                  UpdateStoreComponents,
-                  setCapability,
-                  Platforms,
-                  Swapwindow,
-                  changeDisplay,
-                  onDisplay
-                }).then( () => {
-                  
-                  changeloadingState(() => {return false});
-                  console.log(loading);
-                  
-                  //changeDisplay(() => {return temp})
+                if (result != false) {
                   Swapwindow(() => {return true});
-                });
-              //}
+                } else {
+                  updateText(() => {return "Invalid game Title";});
+                  Swapwindow(() => {return false});
+                }
+                
+                changeloadingState(() => {return false});
+                console.log(loading);
+              });
+              
             }
           }}
           onChange={handleChange}

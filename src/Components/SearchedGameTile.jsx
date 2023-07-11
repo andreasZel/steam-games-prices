@@ -24,7 +24,6 @@ Platforms
 
   return (
     <div className="SearchedGameTile" id={id} onClick={() => {
-      //if (onDisplay === false) {
       
         setloading(true);
         console.log(loading);
@@ -39,18 +38,24 @@ Platforms
           Swapwindow,
           changeDisplay,
           onDisplay
-        }).then(() => {
+        }).then((result) => {
           
           setloading(false);
           console.log(loading);
           console.log(temp);
           
-          changeDisplay(() => {return temp})
-          Swapwindow(() => {return true});
+          if (result != false) {
+            changeDisplay(() => {return temp});
+            Swapwindow(() => {return true});
+          } else {
+            Swapwindow(() => {return false});
+            alert("Invalid game Title");
+          }
+
           console.log(StoreComponents);
         }).catch((error)=>{console.log(error)});
       }
-      //}
+      
     }>
       <h3 className="Game_Title">{Game_Title}</h3>
       <img

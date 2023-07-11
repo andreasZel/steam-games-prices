@@ -28,7 +28,7 @@ export default async function CreateGame({
     return item.name.toLowerCase() === TypedText.toLowerCase();
   });
 
-  if (Game === null) 
+  if (Game === undefined) 
     return false;
 
   var GameId = {

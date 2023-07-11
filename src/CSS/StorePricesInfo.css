@@ -59,9 +59,15 @@
     box-shadow: 1px 25px 4px -11px rgba(0, 0, 0, 0.25);
 }
 
+.Price_Diagram > div{
+  height: 100%;
+  width: 100%;
+}
+
 .Stores {
     height: 40vh;
     width: 85%;
+    padding-top: 30px;
     justify-self: center;
     align-self: flex-end;
     display: grid;
