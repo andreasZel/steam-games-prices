@@ -20,15 +20,17 @@ loading,
 setCapability,
 Platforms
 }) {
-  var TypedText = Game_Title;
+  var TypedText = steam_appid;
 
   return (
-    <div className="SearchedGameTile" id={id} onClick={() => {
+    <div className="SearchedGameTile" id={steam_appid} onClick={() => {
       
         setloading(true);
         console.log(loading);
+        var clicked = true;
 
         let temp = CreateGame({ 
+          clicked,
           TypedText, 
           ChangeGameInfo, 
           StoreComponents,
@@ -48,8 +50,8 @@ Platforms
             changeDisplay(() => {return temp});
             Swapwindow(() => {return true});
           } else {
+            updateText(() => {return "Invalid game Title";});
             Swapwindow(() => {return false});
-            alert("Invalid game Title");
           }
 
           console.log(StoreComponents);

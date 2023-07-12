@@ -10,6 +10,7 @@ import moment from 'moment/moment.js';
 const BASE_URL = "http://localhost:3333/";
 
 export default async function CreateGame({ 
+  clicked,
   TypedText, 
   ChangeGameInfo,
   UpdateStoreComponents,
@@ -23,9 +24,16 @@ export default async function CreateGame({
   var TempGame;
   var TempDeal;
   var GameExistsInDb = false;
+  var error_exit = false;
 
   var Game = GameNameAndIdS.find(function (item) {
-    return item.name.toLowerCase() === TypedText.toLowerCase();
+   
+    if (clicked === false){
+      return item.name.toLowerCase() === TypedText.toLowerCase();
+    }else {
+      return String(item.appid) === TypedText;
+    }
+
   });
 
   if (Game === undefined) 
@@ -44,23 +52,37 @@ export default async function CreateGame({
           GameExistsInDb = true;
       }
     }
+  }).catch((error) => {
+    if (error.response.status === 400){
+      error_exit = true;
+      return false;
+    }
   });
 
+  if (error_exit === true)
+    return false;
+
   console.log(GameExistsInDb)
-  
+  var GameObjectId;
+
   await axios
     .post(`${BASE_URL}SteamGames/${GameExistsInDb === false ? "CreateGame/" : "UpdateGame/"}`, GameId)
     .then((response) => {
       TempGame = response.data;
+
+      GameObjectId = {
+        GameId: TempGame.id,
+      };
     })
     .catch((error) => {
-      if (error.response === 400) 
+      if (error.response.status === 400){
+        error_exit = true;
         return false;
+      }
   });
 
-  var GameObjectId = {
-    GameId: TempGame.id,
-  };
+  if (error_exit === true)
+    return false;
 
   await axios
     .post(`${BASE_URL}SteamGames/GetGameDeals/`, GameObjectId)
@@ -68,9 +90,14 @@ export default async function CreateGame({
       TempDeal = response2.data;
     })
     .catch((error) => {
-      if (error.response === 400) 
+      if (error.response.status === 400){
+        error_exit = true;
         return false;
+      }
     });
+
+    if (error_exit === true)
+    return false;
 
     var Developers = "";
     var publishers = "";

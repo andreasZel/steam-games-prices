@@ -109,7 +109,10 @@ export default function SearchBar({
                 };
               });
 
+              var clicked = false;
+
               let temp = CreateGame({ 
+                clicked,
                 TypedText, 
                 ChangeGameInfo, 
                 StoreComponents, 
