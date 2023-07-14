@@ -43,14 +43,14 @@ export default async function CreateGame({
     GameId: Game.appid.toString(),
   };
 
-  await axios.get(`${BASE_URL}SteamGames/`).then((response) => {
+  await axios.post(`${BASE_URL}/SteamGames/GetSteamGame/`, GameId).then((response) => {
+    
     let gamesInDb = response;
+    
     console.log(gamesInDb);
-    if (gamesInDb.data != null) {
-      for (let i = 0; i < gamesInDb.data.length; i++){
-        if (Game.appid.toString() === gamesInDb.data[i].steam_appid)
-          GameExistsInDb = true;
-      }
+
+    if (gamesInDb.data != "") {
+      GameExistsInDb = true;   
     }
   }).catch((error) => {
     if (error.response.status === 400){
