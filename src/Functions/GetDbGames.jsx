@@ -14,8 +14,8 @@ export default async function GetDbGames({
   UpdateStoreComponents,
   setloading,
   loading,
-  setCapability,
-  Platforms
+  Platforms,
+  platformsCapability
 }) {
   var TempGames;
 
@@ -41,7 +41,7 @@ export default async function GetDbGames({
         Store_Img={SteamLogo}
         setloading={setloading}
         loading={loading}
-        setCapability={setCapability}
+        platformsCapability={platformsCapability}
         Platforms={Platforms}
       />
     );

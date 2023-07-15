@@ -24,15 +24,6 @@ export default function MainWindow() {
   const [loading, changeloadingState] = useState(false);
   const [Platforms, platformsCapability] = useState([mac_supported, windows_supported]);
 
-  function setCapability(capability) {
-    platformsCapability(() => {
-      return([
-        capability[0] == true ? mac_supported : mac_not_supported,
-        capability[1] == true ? windows_supported : windows_not_supported
-      ]);
-    });
-  }
-
   function setloading(state){
     changeloadingState(() => {
       return state;
@@ -50,8 +41,8 @@ export default function MainWindow() {
       UpdateStoreComponents,
       setloading,
       loading,
-      setCapability,
-      Platforms
+      Platforms,
+      platformsCapability
     })
   }, [loading]);
 
@@ -67,7 +58,7 @@ export default function MainWindow() {
         changeDisplay={() => {changeDisplay}}
         changeloadingState={changeloadingState}
         loading={loading}
-        setCapability={setCapability}
+        platformsCapability={platformsCapability}
         Platforms={Platforms}
         />
         <Loading />
@@ -85,7 +76,7 @@ export default function MainWindow() {
         changeDisplay={() => {changeDisplay}}
         changeloadingState={changeloadingState}
         loading={loading}
-        setCapability={setCapability}
+        platformsCapability={platformsCapability}
         Platforms={Platforms}
         />
         <SearchedGames 
@@ -107,7 +98,7 @@ export default function MainWindow() {
         changeDisplay={() => {changeDisplay}}
         changeloadingState={changeloadingState}
         loading={loading}
-        setCapability={setCapability}
+        platformsCapability={platformsCapability}
         Platforms={Platforms}
         />
         <GameInfoArea 

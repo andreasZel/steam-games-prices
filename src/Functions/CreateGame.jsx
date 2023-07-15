@@ -6,6 +6,10 @@ import StoreComponent from "../Components/StoreComponent.jsx";
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import moment from 'moment/moment.js';
+import mac_supported from "../assets/mac_supported.svg";
+import mac_not_supported from "../assets/mac_not_supported.svg";
+import windows_supported from "../assets/windows_supported.svg";
+import windows_not_supported from "../assets/windows_not_supported.svg"
 
 const BASE_URL = "http://localhost:3333/";
 
@@ -14,8 +18,8 @@ export default async function CreateGame({
   TypedText, 
   ChangeGameInfo,
   UpdateStoreComponents,
-  setCapability,
   Platforms,
+  platformsCapability,
   Swapwindow,
   changeDisplay,
   onDisplay
@@ -43,9 +47,11 @@ export default async function CreateGame({
     GameId: Game.appid.toString(),
   };
 
+  var gamesInDb;
+
   await axios.post(`${BASE_URL}/SteamGames/GetSteamGame/`, GameId).then((response) => {
     
-    let gamesInDb = response;
+    gamesInDb = response;
     
     console.log(gamesInDb);
 
@@ -91,8 +97,10 @@ export default async function CreateGame({
     })
     .catch((error) => {
       if (error.response.status === 400){
-        error_exit = true;
-        return false;
+        if (gamesInDb.data.price[0].priceOnDate != "free"){
+          error_exit = true;
+          return false;
+        }
       }
     });
 
@@ -113,11 +121,14 @@ export default async function CreateGame({
     if (TempGame.genres != null)  
       genres = TempGame.genres.join(" | ");
 
-    metacritic = TempGame.metacritic == "false" ? "No" : TempGame.metacritic[0];
+    if (TempGame.metacritic != undefined)  
+      metacritic = TempGame.metacritic == "false" ? "No" : TempGame.metacritic[0];
 
-  var screenshots = TempGame.screenshots.map((index) => {
-    return <img key={index} className="screenshot_imge" alt="screenshot" src={index}/>
-  })
+    if (TempGame.screenshots != undefined){     
+      var screenshots = TempGame.screenshots.map((index) => {
+        return <img key={index} className="screenshot_imge" alt="screenshot" src={index}/>
+      })
+    }
 
   var gameDeals = [[], []]
   var seriesForChart = [];
@@ -266,6 +277,16 @@ export default async function CreateGame({
   }
 
   console.log(Stores);
+  console.log(Platforms);
+  
+  platformsCapability(() => {
+    return([
+      TempGame.platforms[1] == "true" ? mac_supported : mac_not_supported,
+      TempGame.platforms[0] == "true" ? windows_supported : windows_not_supported
+    ]);
+  });
+
+  console.log(Platforms);
 
 var Tmp = (
   <>
@@ -293,7 +314,6 @@ var Tmp = (
     return Tmp;
   });
 
-  setCapability(TempGame.platforms)
   UpdateStoreComponents(()=>{return Stores});
 
   return true;

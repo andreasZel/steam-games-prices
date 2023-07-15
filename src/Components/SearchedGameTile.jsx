@@ -18,7 +18,8 @@ Store_Img,
 setloading,
 loading,
 setCapability,
-Platforms
+Platforms,
+platformsCapability
 }) {
   var TypedText = steam_appid;
 
@@ -37,6 +38,7 @@ Platforms
           UpdateStoreComponents,
           setCapability,
           Platforms,
+          platformsCapability,
           Swapwindow,
           changeDisplay,
           onDisplay

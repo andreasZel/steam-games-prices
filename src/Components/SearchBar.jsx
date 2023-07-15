@@ -35,7 +35,7 @@ export default function SearchBar({
   changeDisplay, 
   loading, 
   changeloadingState,
-  setCapability,
+  platformsCapability,
   Platforms
 }) {
 
@@ -117,8 +117,8 @@ export default function SearchBar({
                 ChangeGameInfo, 
                 StoreComponents, 
                 UpdateStoreComponents,
-                setCapability,
                 Platforms,
+                platformsCapability,
                 Swapwindow,
                 changeDisplay,
                 onDisplay
