@@ -7,6 +7,7 @@ export default function SearchedGames(props) {
       No Games Searched
     </div>
   )
+  
   return (
     <div className="SearchedGames">
       <h2 className="search_Title">Games Searched:</h2>

@@ -22,9 +22,9 @@
   width: 95%;
   margin: auto;
   justify-content: center;
-  height: 900px; 
+  height: 900px;
   grid-auto-rows: 1fr;
-  grid-template-columns: 14vw 14vw 14vw 14vw ;
+  grid-template-columns: 14vw 14vw 14vw 14vw;
   grid-gap: 10px;
   grid-row-gap: 20px;
 }
@@ -46,4 +46,5 @@
   justify-self: center;
   align-self: center;
   grid-column: 1/5;
+  color: aliceblue;
 }

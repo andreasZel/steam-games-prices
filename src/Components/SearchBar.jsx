@@ -44,13 +44,10 @@ export default function SearchBar({
   const [TypedText, updateText] = useState("");
   const [SuggestionList, updateSuggestionList] = useState(null);
 
-  function changeStyle() {
-    FocusGain((previousStyle) => {
+  function changeStyle(style) {
+    FocusGain(() => {
       return {
-        filter:
-          previousStyle.filter === "none"
-            ? "drop-shadow(0px 0px 12px rgba(255, 255, 255, 0.73))"
-            : "none",
+        filter: style[0] 
       };
     });
 
@@ -60,12 +57,7 @@ export default function SearchBar({
         animation: "fadeIn 0.1s",
         animationDelay: "0s",
         animationFillMode: "forwards",
-        visibility:
-          previousStyle.visibility === "hidden" &&
-          SuggestionList != null &&
-          TypedText != ""
-            ? ""
-            : "hidden",
+        visibility: style[1]
       };
     });
   }
@@ -81,15 +73,17 @@ export default function SearchBar({
         <input
           value={TypedText}
           className="Search_input"
-          onFocus={changeStyle}
-          onBlur={changeStyle}
-          onKeyUp={() => {
-            GameNameSuggestions({
-              TypedText,
-              updateSuggestionList,
-              SuggestiOn,
-              updateText,
-            });
+          onFocus={() => {changeStyle(["drop-shadow(0px 0px 12px rgba(255, 255, 255, 0.73))", SuggestionList != null ? "" : "hidden"]);}}
+          onBlur={() => {changeStyle(["none", "hidden"]);}}
+          onKeyUp={(event) => {
+            if (event.key != "Enter") {
+              GameNameSuggestions({
+                TypedText,
+                updateSuggestionList,
+                SuggestiOn,
+                updateText,
+              });
+            }
           }}
           onKeyDown={(event) => {
             if (event.key === "Enter") {
