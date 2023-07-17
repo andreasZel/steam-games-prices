@@ -163,7 +163,7 @@ export default async function CreateGame({
   console.log(TempDeal);
   console.log(TempGame);
 
-  if(TempDeal.deals != null) {
+  if(TempDeal.deals != null && TempDeal.cheapest[0] != "free") {
 
     var uniqueStores = [TempDeal.deals[0].storeId];
 
@@ -195,7 +195,7 @@ export default async function CreateGame({
         data: seriesForChart[parseInt(uniqueStores[z])],
       };
     }
-  }else {
+  } else {
     series_options[0] = {
       name: "Steam",
       data: [[timestampMillis, 0]],
