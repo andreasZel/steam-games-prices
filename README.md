@@ -3,6 +3,8 @@
 React, Go lang Practice.
 An app that displays steam prices in different platforms.
 
+API created: (https://github.com/andreasZel/GoSteamAPI)
+
 - Search a Steam Game to find it's price across different web stores.
 - Once you searched the game is saved, along with its deals, if you click it or search it again the previous prices will be included in the price chart.
 
